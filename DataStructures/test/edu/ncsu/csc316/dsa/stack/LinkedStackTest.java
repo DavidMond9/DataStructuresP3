@@ -14,7 +14,9 @@ import org.junit.Test;
  *
  */
 public class LinkedStackTest {
-
+	/**
+	 * Test stack for testing LinkedStack.
+	 */
     private Stack<String> stack;
     
     /**

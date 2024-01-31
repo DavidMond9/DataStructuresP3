@@ -78,36 +78,57 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
             }
             @SuppressWarnings("unchecked")
             E[] newData = (E[]) (new Object[newCapacity]);
-            // TODO: complete this code
-            // Remember that we cannot copy an array the same way we do
-            // when resizing an array-based list since we do not want to
-            // "break" the elements in the queue since there may be wrap-around
-            // at the end of the array
+            for (int i = 0; i < oldCapacity; i++) {
+                newData[i] = data[i];
+            }
+            data = newData;
         }
     }
 
-	
+	/**
+	 * Adds an element to the back of the queue.
+	 * @param element element to add to the back of the queue.
+	 */
 	public void enqueue(E element) {
-		// TODO Auto-generated method stub
+		ensureCapacity(size + 1);
+		data[rear] = element;
+		rear = (rear + 1) % data.length;
+		size++;
 		
 	}
 
-	
+	/**
+	 * Removes an element from the front of the queue and returns it.
+	 * @return returns the front element removed.
+	 */
 	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		E now = data[front];
+		data[front] = null;
+		front = (front + 1) % data.length;
+		size--;
+		return now;
 	}
 
-	
+	/**
+	 * Returns the front element of the queue.
+	 * @return the front element of the queue.
+	 */
 	public E front() {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		return data[front];
 	}
 
-	
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+	/**
+	 * Returns the size of the queue.
+	 * @return returns the size of the queue.
+	 */
+	public int size() {		
+		return size;
 	}
 
     
