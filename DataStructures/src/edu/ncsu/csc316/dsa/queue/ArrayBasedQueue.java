@@ -50,6 +50,8 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
     public ArrayBasedQueue(int initialCapacity) {
         data = (E[]) (new Object[initialCapacity]);
         size = 0;
+        front = 0;
+        rear = 0;
     }
 
     /**
