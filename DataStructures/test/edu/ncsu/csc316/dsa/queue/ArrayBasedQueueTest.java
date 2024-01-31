@@ -40,6 +40,7 @@ public class ArrayBasedQueueTest {
         assertFalse(queue.isEmpty());
         assertEquals("one", queue.front());
         queue.enqueue("two");
+        assertEquals(2, queue.size());
         assertEquals("one", queue.front());
         
         
