@@ -50,8 +50,6 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
     public ArrayBasedQueue(int initialCapacity) {
         data = (E[]) (new Object[initialCapacity]);
         size = 0;
-        front = 0;
-        rear = 0;
     }
 
     /**
@@ -93,8 +91,14 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 	 */
 	public void enqueue(E element) {
 		ensureCapacity(size + 1);
-		rear = (front + size) % data.length;
-		data[rear] = element;
+		if(size == 0) {
+			data[rear] = element;
+			rear = (front + size) % data.length;
+		}
+		else {
+			rear = (front + size) % data.length;
+			data[rear] = element;
+		}
 		size++;
 		
 	}
