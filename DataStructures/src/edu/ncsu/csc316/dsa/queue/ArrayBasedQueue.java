@@ -91,14 +91,8 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 	 */
 	public void enqueue(E element) {
 		ensureCapacity(size + 1);
-		if(size == 0) {
-			data[rear] = element;
-			rear = (front + size) % data.length;
-		}
-		else {
-			rear = (front + size) % data.length;
-			data[rear] = element;
-		}
+		rear = ((front + size) % data.length) + 1;
+		data[rear - 1] = element;
 		size++;
 		
 	}
