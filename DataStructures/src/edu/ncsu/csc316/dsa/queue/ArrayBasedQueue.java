@@ -90,10 +90,9 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 	 * @param element element to add to the back of the queue.
 	 */
 	public void enqueue(E element) {
-		ensureCapacity(size + 1);
-		int end = ((front + size) % data.length);
-		data[end] = element;
-		rear = (end + 1) % data.length;
+		ensureCapacity(rear + 1);
+		data[rear] = element;
+		rear++;
 		size++;
 		
 	}
@@ -107,9 +106,13 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 			throw new NoSuchElementException();
 		}
 		E now = data[front];
-		data[front] = null;
-		front = (front + 1) % data.length;
+		for(int i = 0; i < size - 1; i++) {
+			data[i] = data[i + 1];
+		}
+		data[size - 1] = null;
+		
 		size--;
+		rear--;
 		return now;
 	}
 
